@@ -15,7 +15,7 @@ interface IJwtTokenService {
      * @param token Token
      * @return 用户信息
      */
-    fun getAuthentication(token: String): Authentication
+    fun extractAuthentication(token: String): Authentication
 
     /**
      * 验证 Token 是否合法
