@@ -31,28 +31,28 @@ class WebSecurityConfiguration {
         jwtTokenAuthorizationFilter: JwtTokenAuthorizationFilter
     ): SecurityFilterChain {
         return httpSecurity
-            .httpBasic { configurer ->
-                configurer.disable()
+            .httpBasic {
+                it.disable()
             } // 关闭基本身份验证
-            .csrf { configurer ->
-                configurer.disable()
+            .csrf {
+                it.disable()
             } // 关闭跨域保护
-            .sessionManagement { configurer ->
-                configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .sessionManagement {
+                it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             } // 关闭 Session 管理
-            .cors { configurer ->
-                configurer.configurationSource(corsConfigurationSource)
+            .cors {
+                it.configurationSource(corsConfigurationSource)
             } // 配置跨域
             .addFilterBefore(
                 jwtTokenAuthorizationFilter,
                 UsernamePasswordAuthenticationFilter::class.java
             ) // 添加 JWT Token 过滤器
             .authenticationManager(authenticationManager) // 配置认证管理器
-            .authorizeHttpRequests { registry ->
-                registry
-                    .requestMatchers(HttpMethod.GET).denyAll()
-                    .anyRequest().permitAll()
-            } // 配置授权规则, 禁用所有 GET 请求
+//            .authorizeHttpRequests { registry ->
+//                registry
+//                    .requestMatchers(HttpMethod.GET).denyAll()
+//                    .anyRequest().permitAll()
+//            } // 配置授权规则, 禁用所有 GET 请求
 //            .exceptionHandling { configurer ->
 //                configurer
 //                    .authenticationEntryPoint { _, response, _ ->

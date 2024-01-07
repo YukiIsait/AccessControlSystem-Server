@@ -15,9 +15,7 @@ class ResponseAdvice(private val objectMapper: ObjectMapper) : ResponseBodyAdvic
     override fun supports(
         returnType: MethodParameter,
         converterType: Class<out HttpMessageConverter<*>>
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
     override fun beforeBodyWrite(
         body: Any?,
@@ -26,11 +24,9 @@ class ResponseAdvice(private val objectMapper: ObjectMapper) : ResponseBodyAdvic
         selectedConverterType: Class<out HttpMessageConverter<*>>,
         request: ServerHttpRequest,
         response: ServerHttpResponse
-    ): Any? {
-        return when (body) {
-            is ResponseStructure -> body
-            is String -> objectMapper.writeValueAsString(ResponseStructure.success(body))
-            else -> ResponseStructure.success(body)
-        }
+    ): Any? = when (body) {
+        is ResponseStructure -> body
+        is String -> objectMapper.writeValueAsString(ResponseStructure.success(body))
+        else -> ResponseStructure.success(body)
     }
 }
