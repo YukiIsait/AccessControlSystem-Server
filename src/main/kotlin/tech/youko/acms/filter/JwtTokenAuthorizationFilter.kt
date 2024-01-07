@@ -42,6 +42,6 @@ class JwtTokenAuthorizationFilter(private val jwtTokenService: JwtTokenService) 
             }
         }
         // 如果请求头中没有携带 Token 则放行至下一个过滤器
-        chain.doFilter(request, response);
+        chain.doFilter(request, response)
     }
 }
