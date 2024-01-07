@@ -20,4 +20,3 @@ spring:
 acms:
   jwt:
     secret-key: A6F8E003-6A25-45DB-A1DE-CBDA730DB28F
-    duration: 3600000

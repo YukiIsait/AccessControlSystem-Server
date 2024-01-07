@@ -16,9 +16,6 @@ import javax.crypto.SecretKey
 
 @Service
 class JwtTokenService(private val jwtProperties: JwtProperties) : IJwtTokenService {
-    // 存入 Token 中的角色信息键名
-    private val authoritiesKey: String = "authorities"
-
     // 用于签发 Token 的密钥
     private val secretKey: SecretKey = Keys.hmacShaKeyFor(jwtProperties.secretKey.toByteArray())
 
@@ -39,7 +36,7 @@ class JwtTokenService(private val jwtProperties: JwtProperties) : IJwtTokenServi
             .issuedAt(now)
             .expiration(expiration)
             .subject(authentication.name)
-            .claim(authoritiesKey, authentication.authorities.joinToString(","))
+            .claim(jwtProperties.authoritiesKey, authentication.authorities.joinToString(","))
             .signWith(secretKey, Jwts.SIG.HS256)
             .compact()
     }
@@ -52,8 +49,8 @@ class JwtTokenService(private val jwtProperties: JwtProperties) : IJwtTokenServi
             .payload
         // 将 Token 中逗号分隔的角色信息转换为 GrantedAuthority 列表
         val authorities: Collection<GrantedAuthority> =
-            if (claims.containsKey(authoritiesKey)) {
-                AuthorityUtils.commaSeparatedStringToAuthorityList(claims[authoritiesKey].toString())
+            if (claims.containsKey(jwtProperties.authoritiesKey)) {
+                AuthorityUtils.commaSeparatedStringToAuthorityList(claims[jwtProperties.authoritiesKey].toString())
             } else {
                 AuthorityUtils.NO_AUTHORITIES
             }
