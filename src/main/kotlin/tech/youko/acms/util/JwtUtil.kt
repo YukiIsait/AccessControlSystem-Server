@@ -1,4 +1,4 @@
-package tech.youko.acms.service
+package tech.youko.acms.util
 
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
@@ -8,18 +8,18 @@ import org.springframework.security.core.Authentication
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.AuthorityUtils
 import org.springframework.security.core.userdetails.User
-import org.springframework.stereotype.Service
+import org.springframework.stereotype.Component
 import tech.youko.acms.properties.JwtProperties
 import java.util.UUID
 import java.util.Date
 import javax.crypto.SecretKey
 
-@Service
-class JwtTokenService(private val jwtProperties: JwtProperties) : IJwtTokenService {
+@Component
+class JwtUtil(private val jwtProperties: JwtProperties) {
     // 用于签发 Token 的密钥
     private val secretKey: SecretKey = Keys.hmacShaKeyFor(jwtProperties.secretKey.toByteArray())
 
-    override fun generateToken(authentication: Authentication): String {
+    fun generateToken(authentication: Authentication): String {
         // 令牌
         val id = UUID.randomUUID().toString()
         // 签发时间
@@ -41,7 +41,7 @@ class JwtTokenService(private val jwtProperties: JwtProperties) : IJwtTokenServi
             .compact()
     }
 
-    override fun extractAuthentication(token: String): Authentication {
+    fun extractAuthentication(token: String): Authentication {
         val claims: Claims = Jwts.parser()
             .verifyWith(secretKey)
             .build()
@@ -59,7 +59,7 @@ class JwtTokenService(private val jwtProperties: JwtProperties) : IJwtTokenServi
         return UsernamePasswordAuthenticationToken(principal, token, authorities)
     }
 
-    override fun validateToken(token: String): Boolean {
+    fun validateToken(token: String): Boolean {
         // 如果 Token 能够解析且未过期则返回 True
         return try {
             !Jwts.parser()

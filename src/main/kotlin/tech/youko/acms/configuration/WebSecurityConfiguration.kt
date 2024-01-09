@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.security.authentication.AuthenticationManager
+import org.springframework.security.authentication.AuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -48,30 +49,6 @@ class WebSecurityConfiguration {
                 UsernamePasswordAuthenticationFilter::class.java
             ) // 添加 JWT Token 过滤器
             .authenticationManager(authenticationManager) // 配置认证管理器
-//            .authorizeHttpRequests { registry ->
-//                registry
-//                    .requestMatchers(HttpMethod.GET).denyAll()
-//                    .anyRequest().permitAll()
-//            } // 配置授权规则, 禁用所有 GET 请求
-//            .exceptionHandling { configurer ->
-//                configurer
-//                    .authenticationEntryPoint { _, response, _ ->
-//                        response.status = HttpStatus.UNAUTHORIZED.value()
-//                        response.writer.write(
-//                            JsonUtil.toJson(
-//                                CommonResultStructure.failed("401: Full authentication is required to access this resource")
-//                            )
-//                        )
-//                    }
-//                    .accessDeniedHandler { _, response, _ ->
-//                        response.status = HttpStatus.FORBIDDEN.value()
-//                        response.writer.write(
-//                            JsonUtil.toJson(
-//                                CommonResultStructure.failed("403: Access is denied")
-//                            )
-//                        )
-//                    }
-//            } // 配置异常处理
             .build()
     }
 

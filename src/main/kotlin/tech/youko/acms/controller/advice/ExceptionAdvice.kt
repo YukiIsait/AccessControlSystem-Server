@@ -8,6 +8,7 @@ import tech.youko.acms.structure.ResponseStructure
 class ExceptionAdvice {
     @ExceptionHandler
     fun handleException(e: Exception): ResponseStructure {
+        // e.printStackTrace()
         return ResponseStructure.failure("${e.javaClass.simpleName}: ${e.message}")
     }
 }

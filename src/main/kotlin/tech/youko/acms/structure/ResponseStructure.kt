@@ -12,7 +12,7 @@ data class ResponseStructure(
 
     companion object {
         fun success(data: Any? = null): ResponseStructure {
-            return ResponseStructure(Status.SUCCESS.ordinal, Status.SUCCESS.name, data)
+            return ResponseStructure(data = data)
         }
 
         fun failure(message: String = Status.FAILURE.name): ResponseStructure {

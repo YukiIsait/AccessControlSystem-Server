@@ -11,10 +11,10 @@ import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
 import org.springframework.util.StringUtils
 import org.springframework.web.filter.GenericFilterBean
-import tech.youko.acms.service.JwtTokenService
+import tech.youko.acms.util.JwtUtil
 
 @Component
-class JwtTokenAuthorizationFilter(private val jwtTokenService: JwtTokenService) : GenericFilterBean() {
+class JwtTokenAuthorizationFilter(private val jwtTokenService: JwtUtil) : GenericFilterBean() {
     companion object {
         const val HEADER_PREFIX = "Bearer "
     }
