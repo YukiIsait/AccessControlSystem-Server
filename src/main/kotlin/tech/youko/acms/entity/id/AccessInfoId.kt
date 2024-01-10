@@ -1,4 +1,4 @@
-package tech.youko.acms.entity
+package tech.youko.acms.entity.id
 
 import jakarta.persistence.*
 import java.io.Serializable

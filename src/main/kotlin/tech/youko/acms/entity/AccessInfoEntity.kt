@@ -1,6 +1,7 @@
 package tech.youko.acms.entity
 
 import jakarta.persistence.*
+import tech.youko.acms.entity.id.AccessInfoId
 
 @Entity
 @Table(name = "access_info")
