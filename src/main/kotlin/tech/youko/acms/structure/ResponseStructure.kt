@@ -16,7 +16,7 @@ data class ResponseStructure(
         }
 
         fun failure(message: String = Status.FAILURE.name): ResponseStructure {
-            return ResponseStructure(Status.FAILURE.ordinal, message)
+            return ResponseStructure(-Status.FAILURE.ordinal, message)
         }
     }
 }
