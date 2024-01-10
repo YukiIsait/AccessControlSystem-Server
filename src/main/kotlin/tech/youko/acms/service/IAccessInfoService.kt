@@ -3,9 +3,10 @@ package tech.youko.acms.service
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Sort
 import tech.youko.acms.entity.AccessInfoEntity
+import tech.youko.acms.entity.id.AccessInfoId
 
 interface IAccessInfoService {
-    fun getAccessInfoById(id: String): AccessInfoEntity
+    fun getAccessInfoById(id: AccessInfoId): AccessInfoEntity
 
     fun listAccessInfoWithPage(
         page: Int,
@@ -20,11 +21,11 @@ interface IAccessInfoService {
         accessInfo: AccessInfoEntity
     ): Page<AccessInfoEntity>
 
-    fun existAccessInfoById(id: String): Boolean
+    fun existAccessInfoById(id: AccessInfoId): Boolean
 
     fun addAccessInfo(accessInfo: AccessInfoEntity)
 
-    fun deleteAccessInfoById(id: String)
+    fun deleteAccessInfoById(id: AccessInfoId)
 
     fun updateAccessInfo(accessInfo: AccessInfoEntity)
 }
