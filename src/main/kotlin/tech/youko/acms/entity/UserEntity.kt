@@ -3,8 +3,8 @@ package tech.youko.acms.entity
 import jakarta.persistence.*
 
 @Entity
-@Table(name = "user_info")
-data class UserInfoEntity(
+@Table(name = "user")
+data class UserEntity(
     @Id
     @Column(nullable = false, length = 40)
     var id: String,

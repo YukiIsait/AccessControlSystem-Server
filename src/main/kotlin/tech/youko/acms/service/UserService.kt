@@ -8,60 +8,60 @@ import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
-import tech.youko.acms.entity.UserInfoEntity
-import tech.youko.acms.repository.IUserInfoRepository
+import tech.youko.acms.entity.UserEntity
+import tech.youko.acms.repository.IUserRepository
 
 @Service
-class UserInfoService(
-    private val userInfoRepository: IUserInfoRepository,
+class UserService(
+    private val userRepository: IUserRepository,
     private val passwordEncoder: PasswordEncoder
-) : IUserInfoService {
+) : IUserService {
     override fun loadUserByUsername(username: String): UserDetails {
-        return userInfoRepository.findById(username).map {
+        return userRepository.findById(username).map {
             User(it.id, it.password, AuthorityUtils.commaSeparatedStringToAuthorityList(it.authorities))
         }.orElseThrow {
             UsernameNotFoundException("User '$username' not found")
         }
     }
 
-    override fun getUserById(id: String): UserInfoEntity {
-        return userInfoRepository.findById(id).orElseThrow {
+    override fun getUserById(id: String): UserEntity {
+        return userRepository.findById(id).orElseThrow {
             EntityNotFoundException("User '$id' not found")
         }
     }
 
-    override fun listUserWithPage(page: Int, size: Int, sort: Sort): Page<UserInfoEntity> {
-        return userInfoRepository.findAll(PageRequest.of(page, size, sort))
+    override fun listUserWithPage(page: Int, size: Int, sort: Sort): Page<UserEntity> {
+        return userRepository.findAll(PageRequest.of(page, size, sort))
     }
 
-    override fun listUserWithPageLike(page: Int, size: Int, sort: Sort, user: UserInfoEntity): Page<UserInfoEntity> {
+    override fun listUserWithPageLike(page: Int, size: Int, sort: Sort, user: UserEntity): Page<UserEntity> {
         val exampleMatcher = ExampleMatcher.matching().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
-        return userInfoRepository.findAll(Example.of(user, exampleMatcher), PageRequest.of(page, size, sort))
+        return userRepository.findAll(Example.of(user, exampleMatcher), PageRequest.of(page, size, sort))
     }
 
     override fun existUserById(id: String): Boolean {
-        return userInfoRepository.existsById(id)
+        return userRepository.existsById(id)
     }
 
-    override fun addUser(user: UserInfoEntity) {
-        if (userInfoRepository.existsById(user.id)) {
+    override fun addUser(user: UserEntity) {
+        if (userRepository.existsById(user.id)) {
             throw EntityNotFoundException("User '${user.id}' already exists")
         }
-        userInfoRepository.save(user.copy(password = passwordEncoder.encode(user.password)))
+        userRepository.save(user.copy(password = passwordEncoder.encode(user.password)))
     }
 
     override fun deleteUserById(id: String) {
-        if (!userInfoRepository.existsById(id)) {
+        if (!userRepository.existsById(id)) {
             throw EntityNotFoundException("User '$id' not found")
         }
-        userInfoRepository.deleteById(id)
+        userRepository.deleteById(id)
     }
 
-    override fun updateUser(user: UserInfoEntity) {
-        val oldUser = userInfoRepository.findById(user.id).orElseThrow {
+    override fun updateUser(user: UserEntity) {
+        val oldUser = userRepository.findById(user.id).orElseThrow {
             EntityNotFoundException("User '${user.id}' not found")
         }
-        userInfoRepository.save(
+        userRepository.save(
             if (user.password == oldUser.password) {
                 user
             } else {
