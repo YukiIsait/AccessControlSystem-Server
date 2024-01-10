@@ -16,7 +16,7 @@ data class UserInfoEntity(
     var password: String,
 
     @Column(nullable = false, length = 100)
-    var roles: String,
+    var authorities: String,
 
     @Column(length = 10)
     var gender: String? = null,

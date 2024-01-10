@@ -1,4 +1,4 @@
-package tech.youko.acms.util
+package tech.youko.acms.helper
 
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
@@ -15,7 +15,7 @@ import java.util.Date
 import javax.crypto.SecretKey
 
 @Component
-class JwtUtil(private val jwtProperties: JwtProperties) {
+class JwtHelper(private val jwtProperties: JwtProperties) {
     // 用于签发 Token 的密钥
     private val secretKey: SecretKey = Keys.hmacShaKeyFor(jwtProperties.secretKey.toByteArray())
 

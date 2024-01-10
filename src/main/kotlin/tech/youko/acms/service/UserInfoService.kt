@@ -18,7 +18,7 @@ class UserInfoService(
 ) : IUserInfoService {
     override fun loadUserByUsername(username: String): UserDetails {
         return userInfoRepository.findById(username).map {
-            User(it.id, it.password, AuthorityUtils.commaSeparatedStringToAuthorityList(it.roles))
+            User(it.id, it.password, AuthorityUtils.commaSeparatedStringToAuthorityList(it.authorities))
         }.orElseThrow {
             UsernameNotFoundException("User '$username' not found")
         }
@@ -30,11 +30,11 @@ class UserInfoService(
         }
     }
 
-    override fun getUserWithPage(page: Int, size: Int, sort: Sort): Page<UserInfoEntity> {
+    override fun listUserWithPage(page: Int, size: Int, sort: Sort): Page<UserInfoEntity> {
         return userInfoRepository.findAll(PageRequest.of(page, size, sort))
     }
 
-    override fun getUserWithPageLike(page: Int, size: Int, sort: Sort, user: UserInfoEntity): Page<UserInfoEntity> {
+    override fun listUserWithPageLike(page: Int, size: Int, sort: Sort, user: UserInfoEntity): Page<UserInfoEntity> {
         val exampleMatcher = ExampleMatcher.matching().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
         return userInfoRepository.findAll(Example.of(user, exampleMatcher), PageRequest.of(page, size, sort))
     }
@@ -44,13 +44,29 @@ class UserInfoService(
     }
 
     override fun addUser(user: UserInfoEntity) {
+        if (userInfoRepository.existsById(user.id)) {
+            throw EntityNotFoundException("User '${user.id}' already exists")
+        }
         userInfoRepository.save(user.copy(password = passwordEncoder.encode(user.password)))
     }
 
     override fun deleteUserById(id: String) {
+        if (!userInfoRepository.existsById(id)) {
+            throw EntityNotFoundException("User '$id' not found")
+        }
         userInfoRepository.deleteById(id)
     }
 
     override fun updateUser(user: UserInfoEntity) {
+        val oldUser = userInfoRepository.findById(user.id).orElseThrow {
+            EntityNotFoundException("User '${user.id}' not found")
+        }
+        userInfoRepository.save(
+            if (user.password == oldUser.password) {
+                user
+            } else {
+                user.copy(password = passwordEncoder.encode(user.password))
+            }
+        )
     }
 }

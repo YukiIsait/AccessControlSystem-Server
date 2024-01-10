@@ -8,13 +8,13 @@ import tech.youko.acms.entity.UserInfoEntity
 interface IUserInfoService : UserDetailsService {
     fun getUserById(id: String): UserInfoEntity
 
-    fun getUserWithPage(
+    fun listUserWithPage(
         page: Int,
         size: Int,
         sort: Sort = Sort.unsorted()
     ): Page<UserInfoEntity>
 
-    fun getUserWithPageLike(
+    fun listUserWithPageLike(
         page: Int,
         size: Int,
         sort: Sort = Sort.unsorted(),
