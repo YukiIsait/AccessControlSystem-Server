@@ -1,4 +1,4 @@
-package tech.youko.acms.service
+package tech.youko.acms.service.implementation
 
 import jakarta.persistence.EntityNotFoundException
 import org.springframework.data.domain.*
@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service
 import tech.youko.acms.entity.AccessInfoEntity
 import tech.youko.acms.entity.id.AccessInfoId
 import tech.youko.acms.repository.IAccessInfoRepository
+import tech.youko.acms.service.IAccessInfoService
 
 @Service
 class AccessInfoService(private val accessInfoRepository: IAccessInfoRepository) : IAccessInfoService {

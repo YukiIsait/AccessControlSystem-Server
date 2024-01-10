@@ -1,4 +1,4 @@
-package tech.youko.acms.service
+package tech.youko.acms.service.implementation
 
 import jakarta.persistence.EntityNotFoundException
 import org.springframework.data.domain.*
@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import tech.youko.acms.entity.UserEntity
 import tech.youko.acms.repository.IUserRepository
+import tech.youko.acms.service.IUserService
 
 @Service
 class UserService(

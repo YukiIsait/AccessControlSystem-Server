@@ -1,10 +1,11 @@
-package tech.youko.acms.service
+package tech.youko.acms.service.implementation
 
 import jakarta.persistence.EntityNotFoundException
 import org.springframework.data.domain.*
 import org.springframework.stereotype.Service
 import tech.youko.acms.entity.DeviceEntity
 import tech.youko.acms.repository.IDeviceRepository
+import tech.youko.acms.service.IDeviceService
 
 @Service
 class DeviceService(private val deviceRepository: IDeviceRepository) : IDeviceService {
