@@ -5,26 +5,26 @@ import org.springframework.data.domain.Sort
 import tech.youko.acms.entity.AccessInfoEntity
 
 interface IAccessInfoService {
-    fun getAccessById(id: String): AccessInfoEntity
+    fun getAccessInfoById(id: String): AccessInfoEntity
 
-    fun listAccessWithPage(
+    fun listAccessInfoWithPage(
         page: Int,
         size: Int,
         sort: Sort = Sort.unsorted()
     ): Page<AccessInfoEntity>
 
-    fun listAccessWithPageLike(
+    fun listAccessInfoWithPageLike(
         page: Int,
         size: Int,
         sort: Sort = Sort.unsorted(),
-        access: AccessInfoEntity
+        accessInfo: AccessInfoEntity
     ): Page<AccessInfoEntity>
 
-    fun existAccessById(id: String): Boolean
+    fun existAccessInfoById(id: String): Boolean
 
-    fun addAccess(access: AccessInfoEntity)
+    fun addAccessInfo(accessInfo: AccessInfoEntity)
 
-    fun deleteAccessById(id: String)
+    fun deleteAccessInfoById(id: String)
 
-    fun updateAccess(access: AccessInfoEntity)
+    fun updateAccessInfo(accessInfo: AccessInfoEntity)
 }
