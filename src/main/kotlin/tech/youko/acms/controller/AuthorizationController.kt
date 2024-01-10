@@ -15,8 +15,8 @@ class AuthorizationController(
     @RequestMapping(value = ["/login"])
     @PreAuthorize("isAnonymous()")
     fun login(
-        @RequestParam("id") id: String,
-        @RequestParam("password") password: String
+        @RequestParam id: String,
+        @RequestParam password: String
     ): String = jwtHelper.generateToken(
         authenticationManager.authenticate(
             UsernamePasswordAuthenticationToken(id, password)

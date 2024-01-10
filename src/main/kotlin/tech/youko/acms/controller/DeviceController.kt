@@ -3,27 +3,27 @@ package tech.youko.acms.controller
 import org.springframework.data.domain.Page
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
-import tech.youko.acms.entity.UserEntity
-import tech.youko.acms.service.IUserService
+import tech.youko.acms.entity.DeviceEntity
+import tech.youko.acms.service.IDeviceService
 import tech.youko.acms.util.commaSeparatedStringToSort
 
 @RestController
-@RequestMapping(value = ["/user"])
+@RequestMapping(value = ["/device"])
 @PreAuthorize("hasRole('ROLE_ADMIN')")
-class UserController(private val userService: IUserService) {
+class DeviceController(private val deviceService: IDeviceService) {
     @GetMapping(value = ["/list"])
     fun list(
         @RequestParam(defaultValue = "0") page: Int,
         @RequestParam(defaultValue = "10") size: Int,
         @RequestParam(defaultValue = "") sort: String
-    ): Page<UserEntity> = userService.listUserWithPage(page, size, commaSeparatedStringToSort(sort))
+    ): Page<DeviceEntity> = deviceService.listDeviceWithPage(page, size, commaSeparatedStringToSort(sort))
 
     @PostMapping(value = ["/add"])
-    fun add(@RequestBody userEntity: UserEntity) = userService.addUser(userEntity)
+    fun add(@RequestBody deviceEntity: DeviceEntity) = deviceService.addDevice(deviceEntity)
 
     @PutMapping(value = ["/update"])
-    fun update(@RequestBody userEntity: UserEntity) = userService.updateUser(userEntity)
+    fun update(@RequestBody deviceEntity: DeviceEntity) = deviceService.updateDevice(deviceEntity)
 
     @DeleteMapping(value = ["/delete"])
-    fun delete(@RequestParam id: String) = userService.deleteUserById(id)
+    fun delete(@RequestParam id: String) = deviceService.deleteDeviceById(id)
 }
