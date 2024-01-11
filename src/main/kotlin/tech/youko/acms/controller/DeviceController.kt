@@ -1,6 +1,5 @@
 package tech.youko.acms.controller
 
-import org.springframework.data.domain.Page
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 import tech.youko.acms.entity.DeviceEntity
