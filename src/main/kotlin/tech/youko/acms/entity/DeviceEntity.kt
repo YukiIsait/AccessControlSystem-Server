@@ -7,11 +7,11 @@ import jakarta.persistence.*
 data class DeviceEntity(
     @Id
     @Column(nullable = false, length = 40)
-    var id: String,
+    var id: String?,
 
     @Column(nullable = false, length = 100)
-    var name: String,
+    var name: String?,
 
     @Column(length = 500)
-    var description: String? = null
+    var description: String?
 )

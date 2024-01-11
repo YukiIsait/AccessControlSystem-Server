@@ -7,26 +7,26 @@ import jakarta.persistence.*
 data class UserEntity(
     @Id
     @Column(nullable = false, length = 40)
-    var id: String,
+    var id: String?,
 
     @Column(nullable = false, length = 100)
-    var name: String,
+    var name: String?,
 
     @Column(nullable = false, length = 100)
-    var password: String,
+    var password: String?,
 
     @Column(nullable = false, length = 100)
-    var authorities: String,
+    var authorities: String?,
 
     @Column(length = 10)
-    var gender: String? = null,
+    var gender: String?,
 
     @Column(length = 20)
-    var phone: String? = null,
+    var phone: String?,
 
     @Column(length = 100)
-    var email: String? = null,
+    var email: String?,
 
     @Column(length = 500)
-    var description: String? = null
+    var description: String?
 )

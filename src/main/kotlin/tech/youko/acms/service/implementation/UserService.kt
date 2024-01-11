@@ -45,7 +45,7 @@ class UserService(
     }
 
     override fun addUser(user: UserEntity) {
-        if (userRepository.existsById(user.id)) {
+        if (userRepository.existsById(user.id!!)) {
             throw EntityNotFoundException("User '${user.id}' already exists")
         }
         userRepository.save(user.copy(password = passwordEncoder.encode(user.password)))
@@ -59,7 +59,7 @@ class UserService(
     }
 
     override fun updateUser(user: UserEntity) {
-        val oldUser = userRepository.findById(user.id).orElseThrow {
+        val oldUser = userRepository.findById(user.id!!).orElseThrow {
             EntityNotFoundException("User '${user.id}' not found")
         }
         userRepository.save(

@@ -29,7 +29,7 @@ class DeviceService(private val deviceRepository: IDeviceRepository) : IDeviceSe
     }
 
     override fun addDevice(device: DeviceEntity) {
-        if (deviceRepository.existsById(device.id)) {
+        if (deviceRepository.existsById(device.id!!)) {
             throw EntityNotFoundException("Device '${device.id}' already exists")
         }
         deviceRepository.save(device)
@@ -43,7 +43,7 @@ class DeviceService(private val deviceRepository: IDeviceRepository) : IDeviceSe
     }
 
     override fun updateDevice(device: DeviceEntity) {
-        if (!deviceRepository.existsById(device.id)) {
+        if (!deviceRepository.existsById(device.id!!)) {
             throw EntityNotFoundException("Device '${device.id}' not found")
         }
         deviceRepository.save(device)

@@ -30,7 +30,7 @@ class AccessInfoService(private val accessInfoRepository: IAccessInfoRepository)
     }
 
     override fun addAccessInfo(accessInfo: AccessInfoEntity) {
-        if (accessInfoRepository.existsById(accessInfo.id)) {
+        if (accessInfoRepository.existsById(accessInfo.id!!)) {
             throw EntityNotFoundException("AccessInfo '${accessInfo.id}' already exists")
         }
         accessInfoRepository.save(accessInfo)
@@ -44,7 +44,7 @@ class AccessInfoService(private val accessInfoRepository: IAccessInfoRepository)
     }
 
     override fun updateAccessInfo(accessInfo: AccessInfoEntity) {
-        if (!accessInfoRepository.existsById(accessInfo.id)) {
+        if (!accessInfoRepository.existsById(accessInfo.id!!)) {
             throw EntityNotFoundException("AccessInfo '${accessInfo.id}' not found")
         }
         accessInfoRepository.save(accessInfo)

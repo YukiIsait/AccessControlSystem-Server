@@ -15,8 +15,14 @@ class DeviceController(private val deviceService: IDeviceService) {
     fun list(
         @RequestParam(defaultValue = "0") page: Int,
         @RequestParam(defaultValue = "10") size: Int,
-        @RequestParam(defaultValue = "") sort: String
-    ): Page<DeviceEntity> = deviceService.listDeviceWithPage(page, size, commaSeparatedStringToSort(sort))
+        @RequestParam(defaultValue = "") sort: String,
+        deviceEntity: DeviceEntity
+    ): Page<DeviceEntity> = deviceService.listDeviceWithPageLike(
+        page,
+        size,
+        commaSeparatedStringToSort(sort),
+        deviceEntity
+    )
 
     @PostMapping(value = ["/add"])
     fun add(@RequestBody deviceEntity: DeviceEntity) = deviceService.addDevice(deviceEntity)

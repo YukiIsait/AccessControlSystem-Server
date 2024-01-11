@@ -7,8 +7,8 @@ import tech.youko.acms.entity.id.AccessInfoId
 @Table(name = "access_info")
 data class AccessInfoEntity(
     @EmbeddedId
-    var id: AccessInfoId,
+    var id: AccessInfoId?,
 
     @Column(length = 500)
-    var description: String? = null
+    var description: String?
 )
