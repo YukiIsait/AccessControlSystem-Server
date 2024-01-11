@@ -13,5 +13,5 @@ data class DeviceEntity(
     var name: String?,
 
     @Column(length = 500)
-    var description: String?
+    var description: String? = null
 )

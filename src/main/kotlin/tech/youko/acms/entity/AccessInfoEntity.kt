@@ -10,5 +10,5 @@ data class AccessInfoEntity(
     var id: AccessInfoId?,
 
     @Column(length = 500)
-    var description: String?
+    var description: String? = null
 )

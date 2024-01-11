@@ -19,14 +19,14 @@ data class UserEntity(
     var authorities: String?,
 
     @Column(length = 10)
-    var gender: String?,
+    var gender: String? = null,
 
     @Column(length = 20)
-    var phone: String?,
+    var phone: String? = null,
 
     @Column(length = 100)
-    var email: String?,
+    var email: String? = null,
 
     @Column(length = 500)
-    var description: String?
+    var description: String? = null
 )
