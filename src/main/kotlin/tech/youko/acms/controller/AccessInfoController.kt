@@ -18,12 +18,12 @@ class AccessInfoController(private val accessInfoService: IAccessInfoService) {
         @RequestParam(defaultValue = "10") size: Int,
         @RequestParam(defaultValue = "") sort: String,
         accessInfoEntity: AccessInfoEntity
-    ): Page<AccessInfoEntity> = accessInfoService.listAccessInfoWithPageLike(
+    ): List<AccessInfoEntity> = accessInfoService.listAccessInfoWithPageLike(
         page,
         size,
         commaSeparatedStringToSort(sort),
         accessInfoEntity
-    )
+    ).content
 
     @PostMapping(value = ["/add"])
     fun add(@RequestBody accessInfoEntity: AccessInfoEntity) = accessInfoService.addAccessInfo(accessInfoEntity)

@@ -17,12 +17,12 @@ class UserController(private val userService: IUserService) {
         @RequestParam(defaultValue = "10") size: Int,
         @RequestParam(defaultValue = "") sort: String,
         userEntity: UserEntity
-    ): Page<UserEntity> = userService.listUserWithPageLike(
+    ): List<UserEntity> = userService.listUserWithPageLike(
         page,
         size,
         commaSeparatedStringToSort(sort),
         userEntity
-    )
+    ).content
 
     @PostMapping(value = ["/add"])
     fun add(@RequestBody userEntity: UserEntity) = userService.addUser(userEntity)
