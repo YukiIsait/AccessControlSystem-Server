@@ -48,7 +48,7 @@ tasks.withType<Test> {
 }
 
 tasks.create("buildJar", Jar::class) {
-    archiveFileName.set("app.jar")
+    archiveFileName.set("application.jar")
     from(sourceSets["main"].output)
     manifest {
         attributes["Main-Class"] = sourceSets["main"].output.files.firstNotNullOf {
