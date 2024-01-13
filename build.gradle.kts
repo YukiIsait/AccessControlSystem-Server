@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.springframework.boot.loader.tools.MainClassFinder
 
 plugins {
     id("org.springframework.boot") version "3.2.1"
@@ -43,4 +44,22 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks.create("buildJar", Jar::class) {
+    archiveFileName.set("${rootProject.name}.jar")
+    from(sourceSets["main"].output)
+    manifest {
+        attributes["Main-Class"] = sourceSets["main"].output.files.firstNotNullOf {
+            MainClassFinder.findSingleMainClass(it)
+        }
+        attributes["Class-Path"] = configurations["runtimeClasspath"].files.joinToString(" ") {
+            "libs/${it.name}"
+        }
+    }
+    delete(layout.buildDirectory.dir("libs/libs"))
+    copy {
+        from(configurations["runtimeClasspath"])
+        into(layout.buildDirectory.dir("libs/libs"))
+    }
 }
