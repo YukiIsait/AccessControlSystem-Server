@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.libsDirectory
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.loader.tools.MainClassFinder
 
@@ -59,6 +60,6 @@ tasks.create("buildJar", Jar::class) {
     }
     copy {
         from(configurations["runtimeClasspath"])
-        into(layout.buildDirectory.dir("libs/libs"))
+        into(libsDirectory.dir("libs"))
     }
 }
