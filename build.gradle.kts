@@ -57,7 +57,6 @@ tasks.create("buildJar", Jar::class) {
             "libs/${it.name}"
         }
     }
-    delete(layout.buildDirectory.dir("libs/libs"))
     copy {
         from(configurations["runtimeClasspath"])
         into(layout.buildDirectory.dir("libs/libs"))
