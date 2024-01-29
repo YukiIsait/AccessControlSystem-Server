@@ -1,29 +1,28 @@
 package tech.youko.acms.filter
 
 import jakarta.servlet.FilterChain
-import jakarta.servlet.ServletRequest
-import jakarta.servlet.ServletResponse
 import jakarta.servlet.http.HttpServletRequest
+import jakarta.servlet.http.HttpServletResponse
 import org.springframework.http.HttpHeaders
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
-import org.springframework.web.filter.GenericFilterBean
+import org.springframework.web.filter.OncePerRequestFilter
 import tech.youko.acms.helper.JwtHelper
 
 @Component
-class JwtTokenAuthorizationFilter(private val jwtHelper: JwtHelper) : GenericFilterBean() {
+class JwtTokenAuthorizationFilter(private val jwtHelper: JwtHelper) : OncePerRequestFilter() {
     companion object {
         const val HEADER_PREFIX = "Bearer "
     }
 
-    override fun doFilter(
-        request: ServletRequest,
-        response: ServletResponse,
-        chain: FilterChain
+    override fun doFilterInternal(
+        request: HttpServletRequest,
+        response: HttpServletResponse,
+        filterChain: FilterChain
     ) {
         // 从请求头中获取 Token
-        val bearerToken = (request as HttpServletRequest).getHeader(HttpHeaders.AUTHORIZATION)
-        // 判断是否有 Token, 且是否以 Bearer 开头
+        val bearerToken = request.getHeader(HttpHeaders.AUTHORIZATION)
+        // 没有 Token, 且不是以 Bearer 开头则放行至下一个过滤器
         if (!bearerToken.isNullOrEmpty() && bearerToken.startsWith(HEADER_PREFIX)) {
             // 裁剪掉前缀 Bearer, 保留 Token
             val token = bearerToken.substring(HEADER_PREFIX.length)
@@ -35,6 +34,6 @@ class JwtTokenAuthorizationFilter(private val jwtHelper: JwtHelper) : GenericFil
             }
         }
         // 如果请求头中没有携带 Token 或 Token 无效则放行至下一个过滤器
-        chain.doFilter(request, response)
+        filterChain.doFilter(request, response)
     }
 }
