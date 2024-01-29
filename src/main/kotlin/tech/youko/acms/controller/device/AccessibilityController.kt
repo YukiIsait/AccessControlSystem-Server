@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RestController
 class AccessibilityController {
     @GetMapping
     fun accessibility(): Boolean {
-        return 2 / 0 > 0
+        return true
     }
 }
