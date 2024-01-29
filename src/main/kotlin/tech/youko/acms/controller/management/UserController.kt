@@ -7,10 +7,10 @@ import tech.youko.acms.service.IUserService
 import tech.youko.acms.util.commaSeparatedStringToSort
 
 @RestController
-@RequestMapping(value = ["/management/user"])
+@RequestMapping("/management/user")
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 class UserController(private val userService: IUserService) {
-    @GetMapping(value = ["/list"])
+    @GetMapping("/list")
     fun list(
         @RequestParam(defaultValue = "0") page: Int,
         @RequestParam(defaultValue = "10") size: Int,
@@ -23,12 +23,12 @@ class UserController(private val userService: IUserService) {
         userEntity
     ).content
 
-    @PostMapping(value = ["/add"])
+    @PostMapping("/add")
     fun add(@RequestBody userEntity: UserEntity) = userService.addUser(userEntity)
 
-    @PutMapping(value = ["/update"])
+    @PutMapping("/update")
     fun update(@RequestBody userEntity: UserEntity) = userService.updateUser(userEntity)
 
-    @DeleteMapping(value = ["/delete"])
+    @DeleteMapping("/delete")
     fun delete(@RequestParam id: String) = userService.deleteUserById(id)
 }

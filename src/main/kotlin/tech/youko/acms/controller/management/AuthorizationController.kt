@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.*
 import tech.youko.acms.helper.JwtHelper
 
 @RestController
-@RequestMapping(value = ["/management/authorization"])
+@RequestMapping("/management/authorization")
 @PreAuthorize("isAnonymous()")
 class AuthorizationController(
     private val authenticationManager: AuthenticationManager,
     private val jwtHelper: JwtHelper
 ) {
-    @GetMapping(value = ["/login"])
+    @GetMapping("/login")
     fun login(
         @RequestParam id: String,
         @RequestParam password: String

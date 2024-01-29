@@ -7,10 +7,10 @@ import tech.youko.acms.service.IDeviceService
 import tech.youko.acms.util.commaSeparatedStringToSort
 
 @RestController
-@RequestMapping(value = ["/management/device"])
+@RequestMapping("/management/device")
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 class DeviceController(private val deviceService: IDeviceService) {
-    @GetMapping(value = ["/list"])
+    @GetMapping("/list")
     fun list(
         @RequestParam(defaultValue = "0") page: Int,
         @RequestParam(defaultValue = "10") size: Int,
@@ -23,12 +23,12 @@ class DeviceController(private val deviceService: IDeviceService) {
         deviceEntity
     ).content
 
-    @PostMapping(value = ["/add"])
+    @PostMapping("/add")
     fun add(@RequestBody deviceEntity: DeviceEntity) = deviceService.addDevice(deviceEntity)
 
-    @PutMapping(value = ["/update"])
+    @PutMapping("/update")
     fun update(@RequestBody deviceEntity: DeviceEntity) = deviceService.updateDevice(deviceEntity)
 
-    @DeleteMapping(value = ["/delete"])
+    @DeleteMapping("/delete")
     fun delete(@RequestParam id: String) = deviceService.deleteDeviceById(id)
 }

@@ -8,10 +8,10 @@ import tech.youko.acms.service.IAccessInfoService
 import tech.youko.acms.util.commaSeparatedStringToSort
 
 @RestController
-@RequestMapping(value = ["/management/access-info"])
+@RequestMapping("/management/access-info")
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 class AccessInfoController(private val accessInfoService: IAccessInfoService) {
-    @GetMapping(value = ["/list"])
+    @GetMapping("/list")
     fun list(
         @RequestParam(defaultValue = "0") page: Int,
         @RequestParam(defaultValue = "10") size: Int,
@@ -24,13 +24,13 @@ class AccessInfoController(private val accessInfoService: IAccessInfoService) {
         accessInfoEntity
     ).content
 
-    @PostMapping(value = ["/add"])
+    @PostMapping("/add")
     fun add(@RequestBody accessInfoEntity: AccessInfoEntity) = accessInfoService.addAccessInfo(accessInfoEntity)
 
-    @PutMapping(value = ["/update"])
+    @PutMapping("/update")
     fun update(@RequestBody accessInfoEntity: AccessInfoEntity) = accessInfoService.updateAccessInfo(accessInfoEntity)
 
-    @DeleteMapping(value = ["/delete"])
+    @DeleteMapping("/delete")
     fun delete(
         @RequestParam("device-id") deviceId: String,
         @RequestParam("user-id") userId: String
