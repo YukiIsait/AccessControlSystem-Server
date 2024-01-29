@@ -1,4 +1,4 @@
-package tech.youko.acms.controller.advice
+package tech.youko.acms.controller
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.core.MethodParameter

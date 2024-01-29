@@ -1,4 +1,4 @@
-package tech.youko.acms.controller
+package tech.youko.acms.controller.management
 
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.authentication.AuthenticationManager
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*
 import tech.youko.acms.helper.JwtHelper
 
 @RestController
-@RequestMapping(value = ["/authorization"])
+@RequestMapping(value = ["/management/authorization"])
 @PreAuthorize("isAnonymous()")
 class AuthorizationController(
     private val authenticationManager: AuthenticationManager,

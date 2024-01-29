@@ -1,4 +1,4 @@
-package tech.youko.acms.controller
+package tech.youko.acms.controller.management
 
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
@@ -8,7 +8,7 @@ import tech.youko.acms.service.IAccessInfoService
 import tech.youko.acms.util.commaSeparatedStringToSort
 
 @RestController
-@RequestMapping(value = ["/access-info"])
+@RequestMapping(value = ["/management/access-info"])
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 class AccessInfoController(private val accessInfoService: IAccessInfoService) {
     @GetMapping(value = ["/list"])
