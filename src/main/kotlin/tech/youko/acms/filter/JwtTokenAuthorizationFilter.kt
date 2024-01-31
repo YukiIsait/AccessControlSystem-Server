@@ -23,7 +23,7 @@ class JwtTokenAuthorizationFilter(private val jwtHelper: JwtHelper) : OncePerReq
         // 从请求头中获取 Token
         val bearerToken = request.getHeader(HttpHeaders.AUTHORIZATION)
         // 没有 Token, 且不是以 Bearer 开头则放行至下一个过滤器
-        if (!bearerToken.isNullOrEmpty() && bearerToken.startsWith(HEADER_PREFIX)) {
+        if (!bearerToken.isNullOrEmpty() && bearerToken.startsWith(HEADER_PREFIX, true)) {
             // 裁剪掉前缀 Bearer, 保留 Token
             val token = bearerToken.substring(HEADER_PREFIX.length)
             // 验证 Token 是否合法
