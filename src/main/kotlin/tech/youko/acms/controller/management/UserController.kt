@@ -10,6 +10,9 @@ import tech.youko.acms.util.commaSeparatedStringToSort
 @RequestMapping("/management/user")
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 class UserController(private val userService: IUserService) {
+    @GetMapping
+    fun get(@RequestParam id: String) = userService.getUserById(id)
+
     @GetMapping("/list")
     fun list(
         @RequestParam(defaultValue = "0") page: Int,
