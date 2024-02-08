@@ -13,7 +13,7 @@ class AuthorizationController(
     private val authenticationManager: AuthenticationManager,
     private val jwtHelper: JwtHelper
 ) {
-    @GetMapping("/login")
+    @GetMapping
     fun login(
         @RequestParam id: String,
         @RequestParam password: String
