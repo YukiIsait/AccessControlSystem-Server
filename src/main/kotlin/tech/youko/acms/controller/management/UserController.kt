@@ -4,7 +4,7 @@ import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 import tech.youko.acms.entity.UserEntity
 import tech.youko.acms.service.IUserService
-import tech.youko.acms.structure.PageResponseStructure
+import tech.youko.acms.structure.response.PageStructure
 import tech.youko.acms.util.commaSeparatedStringToSort
 
 @RestController
@@ -20,7 +20,7 @@ class UserController(private val userService: IUserService) {
         @RequestParam(defaultValue = "10") size: Int,
         @RequestParam(defaultValue = "") sort: String,
         userEntity: UserEntity
-    ): PageResponseStructure<UserEntity> = PageResponseStructure.fromPage(
+    ): PageStructure<UserEntity> = PageStructure.fromPage(
         userService.listUserWithPageLike(
             page,
             size,

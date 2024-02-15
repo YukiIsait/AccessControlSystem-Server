@@ -4,7 +4,7 @@ import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 import tech.youko.acms.entity.DeviceEntity
 import tech.youko.acms.service.IDeviceService
-import tech.youko.acms.structure.PageResponseStructure
+import tech.youko.acms.structure.response.PageStructure
 import tech.youko.acms.util.commaSeparatedStringToSort
 
 @RestController
@@ -20,7 +20,7 @@ class DeviceController(private val deviceService: IDeviceService) {
         @RequestParam(defaultValue = "10") size: Int,
         @RequestParam(defaultValue = "") sort: String,
         deviceEntity: DeviceEntity
-    ): PageResponseStructure<DeviceEntity> = PageResponseStructure.fromPage(
+    ): PageStructure<DeviceEntity> = PageStructure.fromPage(
         deviceService.listDeviceWithPageLike(
             page,
             size,

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*
 import tech.youko.acms.entity.AccessInfoEntity
 import tech.youko.acms.entity.id.AccessInfoId
 import tech.youko.acms.service.IAccessInfoService
-import tech.youko.acms.structure.PageResponseStructure
+import tech.youko.acms.structure.response.PageStructure
 import tech.youko.acms.util.commaSeparatedStringToSort
 
 @RestController
@@ -24,7 +24,7 @@ class AccessInfoController(private val accessInfoService: IAccessInfoService) {
         @RequestParam(defaultValue = "10") size: Int,
         @RequestParam(defaultValue = "") sort: String,
         accessInfoEntity: AccessInfoEntity
-    ): PageResponseStructure<AccessInfoEntity> = PageResponseStructure.fromPage(
+    ): PageStructure<AccessInfoEntity> = PageStructure.fromPage(
         accessInfoService.listAccessInfoWithPageLike(
             page,
             size,
