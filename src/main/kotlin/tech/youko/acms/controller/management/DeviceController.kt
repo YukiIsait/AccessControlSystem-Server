@@ -4,6 +4,7 @@ import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 import tech.youko.acms.entity.DeviceEntity
 import tech.youko.acms.service.IDeviceService
+import tech.youko.acms.structure.PageResponseStructure
 import tech.youko.acms.util.commaSeparatedStringToSort
 
 @RestController
@@ -11,7 +12,7 @@ import tech.youko.acms.util.commaSeparatedStringToSort
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 class DeviceController(private val deviceService: IDeviceService) {
     @GetMapping
-    fun get(@RequestParam id: String) = deviceService.getDeviceById(id)
+    fun get(@RequestParam id: String): DeviceEntity = deviceService.getDeviceById(id)
 
     @GetMapping("/list")
     fun list(
@@ -19,12 +20,14 @@ class DeviceController(private val deviceService: IDeviceService) {
         @RequestParam(defaultValue = "10") size: Int,
         @RequestParam(defaultValue = "") sort: String,
         deviceEntity: DeviceEntity
-    ): List<DeviceEntity> = deviceService.listDeviceWithPageLike(
-        page,
-        size,
-        commaSeparatedStringToSort(sort),
-        deviceEntity
-    ).content
+    ): PageResponseStructure<DeviceEntity> = PageResponseStructure.fromPage(
+        deviceService.listDeviceWithPageLike(
+            page,
+            size,
+            commaSeparatedStringToSort(sort),
+            deviceEntity
+        )
+    )
 
     @PostMapping("/add")
     fun add(@RequestBody deviceEntity: DeviceEntity) = deviceService.addDevice(deviceEntity)

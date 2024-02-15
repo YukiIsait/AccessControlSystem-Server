@@ -4,6 +4,7 @@ import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 import tech.youko.acms.entity.UserEntity
 import tech.youko.acms.service.IUserService
+import tech.youko.acms.structure.PageResponseStructure
 import tech.youko.acms.util.commaSeparatedStringToSort
 
 @RestController
@@ -11,7 +12,7 @@ import tech.youko.acms.util.commaSeparatedStringToSort
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 class UserController(private val userService: IUserService) {
     @GetMapping
-    fun get(@RequestParam id: String) = userService.getUserById(id)
+    fun get(@RequestParam id: String): UserEntity = userService.getUserById(id)
 
     @GetMapping("/list")
     fun list(
@@ -19,12 +20,14 @@ class UserController(private val userService: IUserService) {
         @RequestParam(defaultValue = "10") size: Int,
         @RequestParam(defaultValue = "") sort: String,
         userEntity: UserEntity
-    ): List<UserEntity> = userService.listUserWithPageLike(
-        page,
-        size,
-        commaSeparatedStringToSort(sort),
-        userEntity
-    ).content
+    ): PageResponseStructure<UserEntity> = PageResponseStructure.fromPage(
+        userService.listUserWithPageLike(
+            page,
+            size,
+            commaSeparatedStringToSort(sort),
+            userEntity
+        )
+    )
 
     @PostMapping("/add")
     fun add(@RequestBody userEntity: UserEntity) = userService.addUser(userEntity)

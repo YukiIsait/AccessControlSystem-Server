@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*
 import tech.youko.acms.entity.AccessInfoEntity
 import tech.youko.acms.entity.id.AccessInfoId
 import tech.youko.acms.service.IAccessInfoService
+import tech.youko.acms.structure.PageResponseStructure
 import tech.youko.acms.util.commaSeparatedStringToSort
 
 @RestController
@@ -15,7 +16,7 @@ class AccessInfoController(private val accessInfoService: IAccessInfoService) {
     fun get(
         @RequestParam("device-id") deviceId: String,
         @RequestParam("user-id") userId: String
-    ) = accessInfoService.getAccessInfoById(AccessInfoId(deviceId, userId))
+    ): AccessInfoEntity = accessInfoService.getAccessInfoById(AccessInfoId(deviceId, userId))
 
     @GetMapping("/list")
     fun list(
@@ -23,12 +24,14 @@ class AccessInfoController(private val accessInfoService: IAccessInfoService) {
         @RequestParam(defaultValue = "10") size: Int,
         @RequestParam(defaultValue = "") sort: String,
         accessInfoEntity: AccessInfoEntity
-    ): List<AccessInfoEntity> = accessInfoService.listAccessInfoWithPageLike(
-        page,
-        size,
-        commaSeparatedStringToSort(sort),
-        accessInfoEntity
-    ).content
+    ): PageResponseStructure<AccessInfoEntity> = PageResponseStructure.fromPage(
+        accessInfoService.listAccessInfoWithPageLike(
+            page,
+            size,
+            commaSeparatedStringToSort(sort),
+            accessInfoEntity
+        )
+    )
 
     @PostMapping("/add")
     fun add(@RequestBody accessInfoEntity: AccessInfoEntity) = accessInfoService.addAccessInfo(accessInfoEntity)

@@ -25,7 +25,7 @@ class ResponseAdvice(private val objectMapper: ObjectMapper) : ResponseBodyAdvic
         request: ServerHttpRequest,
         response: ServerHttpResponse
     ): Any? = when (body) {
-        is ResponseStructure -> body
+        is ResponseStructure<*> -> body
         is String -> objectMapper.writeValueAsString(ResponseStructure.success(body))
         else -> ResponseStructure.success(body)
     }

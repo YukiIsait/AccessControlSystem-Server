@@ -15,7 +15,7 @@ import tech.youko.acms.structure.ResponseStructure
 class ErrorController(private val errorAttributes: ErrorAttributes) : ErrorController {
     @RequestMapping("\${server.error.path:\${error.path:/error}}")
     @ResponseStatus(HttpStatus.OK)
-    fun error(request: HttpServletRequest): ResponseStructure {
+    fun error(request: HttpServletRequest): ResponseStructure<Any> {
         val attributes = errorAttributes.getErrorAttributes(
             ServletWebRequest(request),
             ErrorAttributeOptions.of(ErrorAttributeOptions.Include.MESSAGE)

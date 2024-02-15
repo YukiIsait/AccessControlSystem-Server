@@ -2,29 +2,29 @@ package tech.youko.acms.structure
 
 import org.springframework.http.HttpStatus
 
-data class ResponseStructure(
+data class ResponseStructure<T>(
     var status: Int = HttpStatus.OK.value(),
     var message: String = HttpStatus.OK.reasonPhrase,
-    var data: Any? = null
+    var data: T? = null
 ) {
     companion object {
-        fun success(data: Any? = null): ResponseStructure {
+        fun <T> success(data: T? = null): ResponseStructure<T> {
             return ResponseStructure(data = data)
         }
 
-        fun success(status: HttpStatus, data: Any? = null): ResponseStructure {
+        fun <T> success(status: HttpStatus, data: T? = null): ResponseStructure<T> {
             return ResponseStructure(status.value(), status.reasonPhrase, data)
         }
 
-        fun success(status: Int, message: String, data: Any? = null): ResponseStructure {
+        fun <T> success(status: Int, message: String, data: T? = null): ResponseStructure<T> {
             return ResponseStructure(status, message, data)
         }
 
-        fun failure(status: HttpStatus): ResponseStructure {
+        fun failure(status: HttpStatus): ResponseStructure<Any> {
             return ResponseStructure(status.value(), status.reasonPhrase)
         }
 
-        fun failure(status: Int, message: String): ResponseStructure {
+        fun failure(status: Int, message: String): ResponseStructure<Any> {
             return ResponseStructure(status, message)
         }
     }
