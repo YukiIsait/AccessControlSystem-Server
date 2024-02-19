@@ -63,11 +63,13 @@ class UserService(
             EntityNotFoundException("User '${user.id}' not found")
         }
         userRepository.save(
-            if (user.password == oldUser.password) {
-                user
-            } else {
-                user.copy(password = passwordEncoder.encode(user.password))
-            }
+            user.copy(
+                password = if (user.password.isNullOrEmpty()) {
+                    oldUser.password
+                } else {
+                    passwordEncoder.encode(user.password)
+                }
+            )
         )
     }
 }
