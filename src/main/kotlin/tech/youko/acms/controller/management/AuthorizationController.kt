@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*
 import tech.youko.acms.entity.UserEntity
 import tech.youko.acms.helper.JwtHelper
 import tech.youko.acms.service.IUserService
+import tech.youko.acms.structure.response.LoginStructure
 
 @RestController
 @RequestMapping("/management/authorization")
@@ -25,9 +26,12 @@ class AuthorizationController(
     fun login(
         @RequestParam id: String,
         @RequestParam password: String
-    ): String = jwtHelper.generateToken(
-        authenticationManager.authenticate(
-            UsernamePasswordAuthenticationToken(id, password)
-        )
+    ): LoginStructure = LoginStructure(
+        jwtHelper.generateToken(
+            authenticationManager.authenticate(
+                UsernamePasswordAuthenticationToken(id, password)
+            )
+        ),
+        userService.getUserById(id)
     )
 }
