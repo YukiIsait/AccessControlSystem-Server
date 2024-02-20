@@ -12,7 +12,7 @@ import tech.youko.acms.helper.JwtHelper
 @Component
 class JwtTokenAuthorizationFilter(private val jwtHelper: JwtHelper) : OncePerRequestFilter() {
     companion object {
-        const val HEADER_PREFIX = "Bearer "
+        private const val HEADER_PREFIX = "Bearer "
     }
 
     override fun doFilterInternal(
