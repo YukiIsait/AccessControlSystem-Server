@@ -11,7 +11,7 @@ import tech.youko.acms.util.commaSeparatedStringToSort
 @RequestMapping("/management/device")
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 class DeviceController(private val deviceService: IDeviceService) {
-    @GetMapping
+    @GetMapping("/get")
     fun get(@RequestParam id: String): DeviceEntity = deviceService.getDeviceById(id)
 
     @GetMapping("/list")

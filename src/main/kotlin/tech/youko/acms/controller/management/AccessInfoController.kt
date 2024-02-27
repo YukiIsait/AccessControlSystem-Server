@@ -12,7 +12,7 @@ import tech.youko.acms.util.commaSeparatedStringToSort
 @RequestMapping("/management/access-info")
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 class AccessInfoController(private val accessInfoService: IAccessInfoService) {
-    @GetMapping
+    @GetMapping("/get")
     fun get(
         @RequestParam("device-id") deviceId: String,
         @RequestParam("user-id") userId: String

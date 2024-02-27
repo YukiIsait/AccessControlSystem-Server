@@ -10,7 +10,7 @@ import tech.youko.acms.service.IAccessInfoService
 @RestController
 @RequestMapping("/device/accessibility")
 class AccessibilityController(private val accessInfoService: IAccessInfoService) {
-    @GetMapping
+    @GetMapping("/access")
     fun access(
         @RequestParam("device-id") deviceId: String,
         @RequestParam("user-id") userId: String

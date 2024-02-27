@@ -17,9 +17,15 @@ class AuthorizationController(
     private val userService: IUserService,
     private val jwtHelper: JwtHelper
 ) {
-    @GetMapping
+    @GetMapping("/get")
     @PreAuthorize("isAuthenticated()")
     fun get(): UserEntity = userService.getUserById(SecurityContextHolder.getContext().authentication.name)
+
+    @GetMapping("/validate")
+    @PreAuthorize("permitAll()")
+    fun validate(
+        @RequestParam token: String
+    ): Boolean = jwtHelper.validateToken(token)
 
     @GetMapping("/login")
     @PreAuthorize("isAnonymous()")
