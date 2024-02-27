@@ -12,6 +12,7 @@ import tech.youko.acms.structure.response.LoginStructure
 
 @RestController
 @RequestMapping("/management/authorization")
+@PreAuthorize("permitAll()")
 class AuthorizationController(
     private val authenticationManager: AuthenticationManager,
     private val userService: IUserService,
