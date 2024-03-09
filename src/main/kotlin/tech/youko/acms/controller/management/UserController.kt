@@ -12,7 +12,9 @@ import tech.youko.acms.util.commaSeparatedStringToSort
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 class UserController(private val userService: IUserService) {
     @GetMapping("/get")
-    fun get(@RequestParam id: String): UserEntity = userService.getUserById(id)
+    fun get(
+        @RequestParam id: String
+    ): UserEntity = userService.getUserById(id)
 
     @GetMapping("/list")
     fun list(
@@ -30,11 +32,17 @@ class UserController(private val userService: IUserService) {
     )
 
     @PostMapping("/add")
-    fun add(@RequestBody userEntity: UserEntity) = userService.addUser(userEntity)
+    fun add(
+        @RequestBody userEntity: UserEntity
+    ) = userService.addUser(userEntity)
 
     @PutMapping("/update")
-    fun update(@RequestBody userEntity: UserEntity) = userService.updateUser(userEntity)
+    fun update(
+        @RequestBody userEntity: UserEntity
+    ) = userService.updateUser(userEntity)
 
     @DeleteMapping("/delete")
-    fun delete(@RequestParam id: String) = userService.deleteUserById(id)
+    fun delete(
+        @RequestParam id: String
+    ) = userService.deleteUserById(id)
 }

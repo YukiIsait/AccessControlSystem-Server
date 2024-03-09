@@ -1,6 +1,7 @@
 package tech.youko.acms.controller.device
 
 import org.springframework.security.access.prepost.PreAuthorize
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -18,4 +19,12 @@ class AccessibilityController(private val accessInfoService: IAccessInfoService)
         @RequestParam("device-id") deviceId: String,
         @RequestParam("user-id") userId: String
     ): Boolean = accessInfoService.existAccessInfoById(AccessInfoId(deviceId, userId))
+
+    @GetMapping("/access-with-token")
+    @PreAuthorize("isAuthenticated()")
+    fun access(
+        @RequestParam id: String
+    ): Boolean = accessInfoService.existAccessInfoById(
+        AccessInfoId(id, SecurityContextHolder.getContext().authentication.name)
+    )
 }

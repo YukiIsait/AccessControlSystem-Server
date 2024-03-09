@@ -12,7 +12,9 @@ import tech.youko.acms.util.commaSeparatedStringToSort
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 class DeviceController(private val deviceService: IDeviceService) {
     @GetMapping("/get")
-    fun get(@RequestParam id: String): DeviceEntity = deviceService.getDeviceById(id)
+    fun get(
+        @RequestParam id: String
+    ): DeviceEntity = deviceService.getDeviceById(id)
 
     @GetMapping("/list")
     fun list(
@@ -30,11 +32,17 @@ class DeviceController(private val deviceService: IDeviceService) {
     )
 
     @PostMapping("/add")
-    fun add(@RequestBody deviceEntity: DeviceEntity) = deviceService.addDevice(deviceEntity)
+    fun add(
+        @RequestBody deviceEntity: DeviceEntity
+    ) = deviceService.addDevice(deviceEntity)
 
     @PutMapping("/update")
-    fun update(@RequestBody deviceEntity: DeviceEntity) = deviceService.updateDevice(deviceEntity)
+    fun update(
+        @RequestBody deviceEntity: DeviceEntity
+    ) = deviceService.updateDevice(deviceEntity)
 
     @DeleteMapping("/delete")
-    fun delete(@RequestParam id: String) = deviceService.deleteDeviceById(id)
+    fun delete(
+        @RequestParam id: String
+    ) = deviceService.deleteDeviceById(id)
 }

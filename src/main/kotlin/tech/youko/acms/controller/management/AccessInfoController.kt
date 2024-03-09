@@ -34,10 +34,14 @@ class AccessInfoController(private val accessInfoService: IAccessInfoService) {
     )
 
     @PostMapping("/add")
-    fun add(@RequestBody accessInfoEntity: AccessInfoEntity) = accessInfoService.addAccessInfo(accessInfoEntity)
+    fun add(
+        @RequestBody accessInfoEntity: AccessInfoEntity
+    ) = accessInfoService.addAccessInfo(accessInfoEntity)
 
     @PutMapping("/update")
-    fun update(@RequestBody accessInfoEntity: AccessInfoEntity) = accessInfoService.updateAccessInfo(accessInfoEntity)
+    fun update(
+        @RequestBody accessInfoEntity: AccessInfoEntity
+    ) = accessInfoService.updateAccessInfo(accessInfoEntity)
 
     @DeleteMapping("/delete")
     fun delete(
