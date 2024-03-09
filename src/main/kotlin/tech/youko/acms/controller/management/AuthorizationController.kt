@@ -12,7 +12,6 @@ import tech.youko.acms.structure.response.LoginStructure
 
 @RestController
 @RequestMapping("/management/authorization")
-@PreAuthorize("permitAll()")
 class AuthorizationController(
     private val authenticationManager: AuthenticationManager,
     private val userService: IUserService,
@@ -23,7 +22,6 @@ class AuthorizationController(
     fun get(): UserEntity = userService.getUserById(SecurityContextHolder.getContext().authentication.name)
 
     @GetMapping("/validate")
-    @PreAuthorize("permitAll()")
     fun validate(
         @RequestParam token: String
     ): Boolean = jwtHelper.validateToken(token)
