@@ -11,7 +11,7 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: Asia/Taipei
-    property-naming-strategy: SNAKE_CASE
+#    property-naming-strategy: SNAKE_CASE
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/acms
