@@ -29,9 +29,6 @@ data class UserEntity(
     @Column(length = 20)
     var phone: String? = null,
 
-    @Column(length = 100)
-    var email: String? = null,
-
     @Column(length = 500)
     var description: String? = null
 )
