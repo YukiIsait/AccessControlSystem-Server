@@ -1,0 +1,26 @@
+# Identity Authentication Access Control System Based on NFC Technology - Server
+
+🌍 *[简体中文](README.md) ∙ [English](README-EN.md)*
+
+An identity authentication access control system based on NFC technology. Leveraging the portability and intelligence of mobile terminal devices, the system achieves rapid and secure identity verification through NFC technology. This repository is part of the implementation of the server.
+
+## Main Technologies
+
+- Kotlin
+- Spring Boot (Spring Web, Spring Security, Spring Data JPA)
+- MySQL
+- JWT
+
+## Running the Project
+
+> Note: This repository is for the back-end part of the project, which needs to be used in conjunction with the front-end.
+
+- Build the project using the command line
+
+    ```bash
+    ./gradlew bootJar
+    ```
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE.md) file for details.
