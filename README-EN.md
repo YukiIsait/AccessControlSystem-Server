@@ -15,11 +15,11 @@ An identity authentication access control system based on NFC technology. Levera
 
 > Note: This repository is for the back-end part of the project, which needs to be used in conjunction with the front-end.
 
-- Build the project using the command line
+This project uses `IntelliJ IDEA` as the development tool. You can directly import the project and run it, or you can use the command line to build the project:
 
-    ```bash
-    ./gradlew bootJar
-    ```
+```bash
+./gradlew bootJar
+```
 
 ## License
 
