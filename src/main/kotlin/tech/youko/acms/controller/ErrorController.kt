@@ -18,7 +18,11 @@ class ErrorController(private val errorAttributes: ErrorAttributes) : ErrorContr
     fun error(request: HttpServletRequest): ResponseStructure<Any> {
         val attributes = errorAttributes.getErrorAttributes(
             ServletWebRequest(request),
-            ErrorAttributeOptions.of(ErrorAttributeOptions.Include.MESSAGE)
+            ErrorAttributeOptions.of(
+                ErrorAttributeOptions.Include.STATUS,
+                ErrorAttributeOptions.Include.ERROR,
+                ErrorAttributeOptions.Include.MESSAGE
+            )
         )
         return try {
             ResponseStructure.failure(
