@@ -16,7 +16,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/acms
     username: root
-    password: root
+    password: ''
 acms:
   jwt:
     secret-key: A6F8E003-6A25-45DB-A1DE-CBDA730DB28F
