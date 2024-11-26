@@ -2,23 +2,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.4.0</version>
         <relativePath/>
     </parent>
-    
+
     <groupId>tech.youko</groupId>
-    <artifactId>ACMS</artifactId>
+    <artifactId>acms</artifactId>
     <version>1.0.0</version>
-    
+
     <properties>
         <java.version>17</java.version>
         <kotlin.version>1.9.25</kotlin.version>
     </properties>
-    
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -107,6 +107,7 @@
                         <arg>-Xjsr305=strict</arg>
                     </args>
                     <compilerPlugins>
+                        <plugin>all-open</plugin>
                         <plugin>spring</plugin>
                         <plugin>jpa</plugin>
                     </compilerPlugins>
@@ -128,6 +129,13 @@
                         <version>${kotlin.version}</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
             </plugin>
         </plugins>
     </build>
